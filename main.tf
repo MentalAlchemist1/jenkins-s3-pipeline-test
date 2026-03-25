@@ -21,11 +21,11 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"   # Change to your region
+  region = "us-west-2" # Change to your region
 }
 
 resource "aws_s3_bucket" "jenkins_test" {
-  bucket = "aarmour031726"   # Change to something globally unique
+  bucket = "aarmour031726" # Change to something globally unique
 
   tags = {
     Name        = "Jenkins Pipeline Test"
