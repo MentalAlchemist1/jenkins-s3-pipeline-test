@@ -1,12 +1,8 @@
 # ==============================================================================
-#  MAIN.TF — Simple S3 Bucket for Jenkins Pipeline Test
+#  MAIN.TF — S3 Bucket + Proof Artifacts for Class 7 Lab
 # ==============================================================================
-#  Purpose:  Minimal Terraform config to verify your Jenkins pipeline works.
-#            Creates a single S3 bucket — cheap, fast, easy to confirm.
-#
-#  Customize:
-#    1. region → Your AWS region
-#    2. bucket → Must be globally unique across all AWS accounts
+#  Purpose:  Creates S3 bucket and uploads proof-of-completion artifacts
+#            via Jenkins webhook-triggered pipeline.
 # ==============================================================================
 
 terraform {
@@ -21,11 +17,11 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2" # Change to your region
+  region = "us-west-2"
 }
 
 resource "aws_s3_bucket" "jenkins_test" {
-  bucket = "aarmour031726" # Change to something globally unique
+  bucket = "aarmour031726"
 
   tags = {
     Name        = "Jenkins Pipeline Test"
@@ -33,4 +29,20 @@ resource "aws_s3_bucket" "jenkins_test" {
     ManagedBy   = "terraform"
     Class       = "aws-class-7"
   }
+}
+
+# Upload Theo's confirmation screenshot
+resource "aws_s3_object" "theo_confirmation" {
+  bucket       = aws_s3_bucket.jenkins_test.id
+  key          = "proof/theo_confirmation.png"
+  source       = "${path.module}/proof/theo_confirmation.png"
+  content_type = "image/png"
+}
+
+# Upload Armageddon repo link
+resource "aws_s3_object" "armageddon_repo" {
+  bucket       = aws_s3_bucket.jenkins_test.id
+  key          = "proof/armageddon_repo.md"
+  source       = "${path.module}/proof/armageddon_repo.md"
+  content_type = "text/markdown"
 }
