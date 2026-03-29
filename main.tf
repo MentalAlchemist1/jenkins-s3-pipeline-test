@@ -70,6 +70,7 @@ resource "aws_s3_object" "theo_confirmation" {
   key          = "proof/theo_confirmation.png"
   source       = "${path.module}/proof/theo_confirmation.png"
   content_type = "image/png"
+  etag         = filemd5("${path.module}/proof/theo_confirmation.png")
 }
 
 resource "aws_s3_object" "armageddon_repo" {
@@ -77,6 +78,7 @@ resource "aws_s3_object" "armageddon_repo" {
   key          = "proof/armageddon_repo.md"
   source       = "${path.module}/proof/armageddon_repo.md"
   content_type = "text/markdown"
+  etag         = filemd5("${path.module}/proof/armageddon_repo.png")
 }
 
 # ── VALIDATION SCREENSHOTS ───────────────────────────────────────────────────
@@ -86,6 +88,7 @@ resource "aws_s3_object" "jenkins_success" {
   key          = "proof/jenkins_success.png"
   source       = "${path.module}/proof/jenkins_success.png"
   content_type = "image/png"
+  etag         = filemd5("${path.module}/proof/jenkins_success.png")
 }
 
 resource "aws_s3_object" "s3_bucket_contents" {
@@ -93,6 +96,7 @@ resource "aws_s3_object" "s3_bucket_contents" {
   key          = "proof/s3_bucket_contents.png"
   source       = "${path.module}/proof/s3_bucket_contents.png"
   content_type = "image/png"
+  etag         = filemd5("${path.module}/proof/s3_bucket_contents.png")
 }
 
 resource "aws_s3_object" "webhook_delivery" {
@@ -100,4 +104,5 @@ resource "aws_s3_object" "webhook_delivery" {
   key          = "proof/webhook_delivery.png"
   source       = "${path.module}/proof/webhook_delivery.png"
   content_type = "image/png"
+  etag         = filemd5("${path.module}/proof/webhook_delivery.png")
 }
