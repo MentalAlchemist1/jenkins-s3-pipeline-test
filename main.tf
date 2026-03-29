@@ -78,7 +78,7 @@ resource "aws_s3_object" "armageddon_repo" {
   key          = "proof/armageddon_repo.md"
   source       = "${path.module}/proof/armageddon_repo.md"
   content_type = "text/markdown"
-  etag         = filemd5("${path.module}/proof/armageddon_repo.png")
+  etag         = filemd5("${path.module}/proof/armageddon_repo.md")
 }
 
 # ── VALIDATION SCREENSHOTS ───────────────────────────────────────────────────
